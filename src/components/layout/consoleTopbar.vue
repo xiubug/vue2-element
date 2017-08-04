@@ -91,14 +91,14 @@
       </a>
     </el-col>
     <el-col :xs="12" :sm="12" :md="12" :lg="12">
-      <el-dropdown trigger="click" class="topbar-info">
+      <el-dropdown trigger="click" class="topbar-info" @command="handleCommand">
         <a href="javascript:void(0)" class="user-name">
           sosout<i class="el-icon-caret-bottom el-icon--right"></i>
         </a>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>个人中心</el-dropdown-item>
           <el-dropdown-item>重置密码</el-dropdown-item>
-          <el-dropdown-item>退出</el-dropdown-item>
+          <el-dropdown-item command="signOut">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </el-col>
@@ -121,7 +121,19 @@
       }
     },
     methods: {
-
+      handleCommand(command) { // 点击菜单项触发的事件回调
+        const that = this;
+        if(command == 'signOut') { // 模拟退出登录
+          let $sto = that.$sto;
+          let $conf = that.$conf;
+          let cookies = $sto.get($conf.constant.cookie);
+          if(cookies && cookies.token) {
+            delete cookies.token;
+          }
+          $sto.set($conf.constant.cookie, cookies);
+          that.$router.push({path: '/login'});
+        }
+      }
     }
   }
 </script>

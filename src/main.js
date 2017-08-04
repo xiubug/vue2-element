@@ -20,6 +20,7 @@ import { Message } from 'element-ui';
 
 Vue.prototype.$message = Message;
 Vue.prototype.$sto = Sto;
+Vue.prototype.$conf = Config;
 
 Vue.config.productionTip = false
 
