@@ -12,7 +12,7 @@
           <el-input type="password" v-model="formLogin.password" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('formLogin')">提交</el-button>
+          <el-button type="primary" @click="submitForm('formLogin')">登录</el-button>
           <el-button @click="resetForm('formLogin')">重置</el-button>
         </el-form-item>
       </el-form>
@@ -52,6 +52,12 @@ export default {
       }
     };
   },
+  created () {
+    const that = this;
+    let $sto = that.$sto;
+    let cookies = $sto.get(Config.constant.cookie);
+    that.formLogin.username = (cookies && cookies.username) || '';
+  },
   mounted () {
     const that = this
     that.init3D()
@@ -76,8 +82,19 @@ export default {
       }
       const res = await UserService.goLogin(params);
       if (res.length > 0) {
-        Config.localItem(Config.constant.cookie, (new Date()).getTime()); // 模拟登录成功返回的Token
-        that.$router.push({path: '/home'});
+        let $sto = that.$sto;
+        // 模拟登录成功返回的Token
+        let cookies = $sto.get(Config.constant.cookie);
+        if(!cookies) {
+          cookies = {
+            token: (new Date()).getTime(),
+            username: params.username
+          };
+        } else {
+          cookies.token = (new Date()).getTime();
+        }
+        $sto.set(Config.constant.cookie, cookies);
+        that.$router.push({path: '/quick'});
       } else {
         that.$message.error('用户名或密码错误！');
       }

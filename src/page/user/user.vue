@@ -1,10 +1,10 @@
 <template>
-  <div class="hello">三级菜单</div>
+  <div class="hello">用户管理</div>
 </template>
 
 <script>
 export default {
-  name: 'ThrMenu',
+  name: 'User',
   data () {
     return {
 

@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'quick',
+  name: 'Quick',
   data () {
     return {
 

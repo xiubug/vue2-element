@@ -66,22 +66,22 @@
 </style>
 <template>
   <div class="console-sidebar">
-    <el-menu :unique-opened='true' theme="dark" default-active="1" class="sidebar-content" @open="handleOpen" @close="handleClose">
+    <el-menu :unique-opened='true' :router='true' theme="dark" default-active="/quick" class="sidebar-content" @open="handleOpen" @close="handleClose">
       <div class="sidebar-fold">版本1.0.0</div>
-      <el-menu-item index="1"><i class="el-icon-message"></i>快速入门</el-menu-item>
-      <el-submenu index="2">
+      <el-menu-item index="/quick"><i class="el-icon-message"></i>快速入门</el-menu-item>
+      <el-submenu index="base">
         <template slot="title">
           <i class="el-icon-message"></i>
           基础服务
         </template>
-        <el-menu-item index="2-1"><i class="el-icon-document"></i>三级菜单</el-menu-item>
+        <el-menu-item index="/thrmenu"><i class="el-icon-document"></i>三级菜单</el-menu-item>
       </el-submenu>
-      <el-submenu index="3">
+      <el-submenu index="user">
         <template slot="title">
           <i class="el-icon-message"></i>
           用户中心
         </template>
-        <el-menu-item index="3-1"><i class="el-icon-document"></i>用户管理</el-menu-item>
+        <el-menu-item index="/user"><i class="el-icon-document"></i>用户管理</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
