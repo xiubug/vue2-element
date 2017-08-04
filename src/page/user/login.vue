@@ -1,25 +1,98 @@
+<style lang="less" scoped>
+  .login-container {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background-color: #141a48;
+    background-image: url(../../assets/login-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+  }
+  #loginThree {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+  .login-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -230px 0 0 -180px;
+    width: 310px;
+    height: 240px;
+    padding: 25px;
+    box-shadow: 0 0 100px rgba(0,0,0,.08);
+    background-color: #fff;
+    border-radius: 4px;
+    z-index: 3;
+    .login-logo {
+      text-align: center;
+      height: 40px;
+      line-height: 40px;
+      cursor: pointer;
+      margin-bottom: 24px;
+      img {
+        width: 40px;
+        margin-right: 8px;
+      }
+      span {
+        vertical-align: text-bottom;
+        font-size: 16px;
+        text-transform: uppercase;
+        display: inline-block;
+      }
+    }
+    .login-account {
+      color: #999;
+      text-align: center;
+      margin-top: -15px;
+      span {
+        font-size: 12px;
+        &:first-child {
+          margin-right: 16px;
+        }
+      }
+    }
+  }
+  .form-fade-enter-active, .form-fade-leave-active {
+	  	transition: all 1s;
+	}
+
+	.form-fade-enter, .form-fade-leave-active {
+	  	transform: translate3d(0, -50px, 0);
+	  	opacity: 0;
+	}
+</style>
 <template>
   <div class="login-container">
-    <div class="login-form">
-      <div class="login-logo">
-        <img src="../../images/logo.png"> <span>element</span>
+    <transition name="form-fade" mode="in-out">
+      <div class="login-form" v-show="showLogin">
+        <div class="login-logo">
+          <img src="../../images/logo.png"> <span>element</span>
+        </div>
+        <el-form :model="formLogin" :rules="rulesLogin" ref="formLogin">
+          <el-form-item prop="username">
+            <el-input type="text" v-model="formLogin.username" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item prop="password">
+            <el-input type="password" v-model="formLogin.password" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('formLogin')">登录</el-button>
+            <el-button @click="resetForm('formLogin')">重置</el-button>
+          </el-form-item>
+        </el-form>
+        <div class="login-account">
+          <span>账号：sosout</span><span>密码：sosout</span>
+        </div>
       </div>
-      <el-form :model="formLogin" :rules="rulesLogin" ref="formLogin">
-        <el-form-item prop="username">
-          <el-input type="text" v-model="formLogin.username" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item prop="password">
-          <el-input type="password" v-model="formLogin.password" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('formLogin')">登录</el-button>
-          <el-button @click="resetForm('formLogin')">重置</el-button>
-        </el-form-item>
-      </el-form>
-      <div class="login-account">
-        <span>账号：sosout</span><span>密码：sosout</span>
-      </div>
-    </div>
+    </transition>
     <div id="loginThree"></div>
   </div>
 </template>
@@ -28,7 +101,6 @@
 import { Form, FormItem, Input, Button } from 'element-ui';
 import THREE from '../../libs/three/three';
 import UserApi from '../../api/user';
-import Config from '../../config/index';
 export default {
   components: {
     ElForm: Form,
@@ -49,18 +121,21 @@ export default {
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' }
         ]
-      }
+      },
+      showLogin: false
     };
   },
   created () {
     const that = this;
     let $sto = that.$sto;
-    let cookies = $sto.get(Config.constant.cookie);
+    let $conf = that.$conf;
+    let cookies = $sto.get($conf.constant.cookie);
     that.formLogin.username = (cookies && cookies.username) || '';
   },
   mounted () {
-    const that = this
-    that.init3D()
+    const that = this;
+    that.showLogin = true;
+    that.init3D();
   },
   methods: {
     submitForm(name) {
@@ -83,8 +158,9 @@ export default {
       const res = await UserApi.goLogin(params);
       if (res.length > 0) {
         let $sto = that.$sto;
+        let $conf = that.$conf;
         // 模拟登录成功返回的Token
-        let cookies = $sto.get(Config.constant.cookie);
+        let cookies = $sto.get($conf.constant.cookie);
         if(!cookies) {
           cookies = {
             token: (new Date()).getTime(),
@@ -93,7 +169,7 @@ export default {
         } else {
           cookies.token = (new Date()).getTime();
         }
-        $sto.set(Config.constant.cookie, cookies);
+        $sto.set($conf.constant.cookie, cookies);
         that.$router.push({path: '/quick'});
       } else {
         that.$message.error('用户名或密码错误！');
@@ -176,67 +252,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less" scoped>
-  .login-container {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    text-align: center;
-    background-color: #141a48;
-    background-image: url(../../assets/login-bg.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-  }
-  #loginThree {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    overflow: hidden;
-  }
-  .login-form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -240px 0 0 -160px;
-    width: 248px;
-    height: 248px;
-    padding: 36px;
-    box-shadow: 0 0 100px rgba(0,0,0,.08);
-    background-color: #fff;
-    border-radius: 4px;
-    z-index: 3;
-    .login-logo {
-      text-align: center;
-      height: 40px;
-      line-height: 40px;
-      cursor: pointer;
-      margin-bottom: 24px;
-      img {
-        width: 40px;
-        margin-right: 8px;
-      }
-      span {
-        vertical-align: text-bottom;
-        font-size: 16px;
-        text-transform: uppercase;
-        display: inline-block;
-      }
-    }
-    .login-account {
-      color: #999;
-      text-align: center;
-      margin-top: -15px;
-      span {
-        font-size: 12px;
-        &:first-child {
-          margin-right: 16px;
-        }
-      }
-    }
-  }
-</style>

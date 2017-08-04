@@ -1,3 +1,5 @@
+import Config from '../config/index';
+
 const Login = r => require.ensure([], () => r(require('../page/user/login')), 'login');
 const Layout = r => require.ensure([], () => r(require('../page/layout')), 'layout');
 
@@ -9,7 +11,7 @@ const Thrmenu = r => require.ensure([], () => r(require('../page/base/thrMenu'))
 const User = r => require.ensure([], () => r(require('../page/user/user')), 'user');
 
 export default [{
-  path: '/login',
+  path: Config.route.login,
   name: 'Login',
   component: Login
 }, {
@@ -31,7 +33,7 @@ export default [{
   }]
 }, {
   path: '*',
-  redirect: '/login',
+  redirect: Config.route.login,
   name: 'Login',
   component: Login
 }]

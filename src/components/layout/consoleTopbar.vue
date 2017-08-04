@@ -131,7 +131,7 @@
             delete cookies.token;
           }
           $sto.set($conf.constant.cookie, cookies);
-          that.$router.push({path: '/login'});
+          that.$router.push({path: $conf.route.login});
         }
       }
     }
