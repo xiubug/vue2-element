@@ -4,7 +4,7 @@ import fetch from './fetch/index';
  * 封装基础ajax请求
  * @param {any}
  */
-class UserService {
+class UserApi {
   /**
    * 登录界面
    * @param {username} 用户名
@@ -16,4 +16,4 @@ class UserService {
 }
 
 // 实例化再导出
-export default new UserService();
+export default new UserApi();

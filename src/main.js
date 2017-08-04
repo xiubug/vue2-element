@@ -2,13 +2,17 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import './style/reset.css';
 import Vue from 'vue';
+
 import VueRouter from 'vue-router';
 import App from './App';
 import routes from './router';
 
+// store为实例化生成的
+import store from './store';
+
 import Config from './config/index';
 
-import Sto from 'store'
+import Sto from 'store';
 
 Vue.use(VueRouter);
 
@@ -52,6 +56,7 @@ router.afterEach((transition) => {
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

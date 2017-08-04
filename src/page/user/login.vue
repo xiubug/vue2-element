@@ -27,7 +27,7 @@
 <script>
 import { Form, FormItem, Input, Button } from 'element-ui';
 import THREE from '../../libs/three/three';
-import UserService from '../../service/userService';
+import UserApi from '../../api/user';
 import Config from '../../config/index';
 export default {
   components: {
@@ -80,7 +80,7 @@ export default {
         username: formLogin.username,
         password: formLogin.password
       }
-      const res = await UserService.goLogin(params);
+      const res = await UserApi.goLogin(params);
       if (res.length > 0) {
         let $sto = that.$sto;
         // 模拟登录成功返回的Token
