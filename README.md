@@ -1,6 +1,6 @@
 # vue2-element管理系统简单demo
 
-> vue2-element管理系统简单demo
+> 您有什么功能可以给我留言，我来实现！
 
 ## 相关推荐
 
