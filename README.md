@@ -62,19 +62,19 @@ yarn install
 yarn run dev
 
 # 生产版本，对代码进行混淆压缩，提取公共代码，分离css文件
-npm run build
+yarn run build
 
 # 生产版本并查看包分析器报告
-npm run build --report
+yarn run build --report
 
 # 单元测试
-npm run unit
+yarn run unit
 
 # e2e测试
-npm run e2e
+yarn run e2e
 
 # 所有测试
-npm test
+yarn test
 ```
 
 ### 访问
