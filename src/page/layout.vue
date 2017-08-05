@@ -5,7 +5,7 @@
     left: 0px;
     top: 0px;
     bottom: 0px;
-    background-color: #fff;
+    background-color: #eff2f7;
     z-index: 100;
     overflow-x: hidden;
     overflow-y: auto;
@@ -14,15 +14,10 @@
       padding: 50px 0px 0px 180px;
       width: auto;
       height: auto;
-      background-color: #eff2f7;
       .console-bcrumd {
         padding: 0px 20px;
         height: 50px;
         line-height: 50px;
-      }
-      .console-content {
-        padding: 20px;
-        background-color: #fff;
       }
     }
   }
@@ -33,7 +28,7 @@
         <console-sidebar></console-sidebar>
         <div class="console-main">
           <console-bcrumd class="console-bcrumd"></console-bcrumd>
-          <router-view class="console-content"></router-view>
+          <router-view></router-view>
         </div>
     </div>
 </template>
