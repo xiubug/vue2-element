@@ -21,15 +21,18 @@ export default [{
   children: [{ // 快速入门
     path: '/quick',
     name: 'Quick',
-    component: Quick
+    component: Quick,
+    meta: ['快速入门']
   }, { // 基础服务 -- 三级菜单
     path: '/thrmenu',
     name: 'Thrmenu',
-    component: Thrmenu
+    component: Thrmenu,
+    meta: ['基础服务', '三级菜单']
   }, { // 用户中心 -- 用户管理
     path: '/user',
     name: 'User',
-    component: User
+    component: User,
+    meta: ['用户中心', '用户管理']
   }]
 }, {
   path: '*',
