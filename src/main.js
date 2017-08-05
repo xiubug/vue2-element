@@ -16,8 +16,9 @@ import Sto from 'store';
 
 Vue.use(VueRouter);
 
-import { Message } from 'element-ui';
+import { Message, loading } from 'element-ui';
 
+Vue.prototype.$loading = loading;
 Vue.prototype.$message = Message;
 Vue.prototype.$sto = Sto;
 Vue.prototype.$conf = Config;

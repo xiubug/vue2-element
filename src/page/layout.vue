@@ -1,18 +1,27 @@
-<style scoped>
-    .console-body {
-        position: absolute;
-        width: 100%;
-        top: 50px;
-        bottom: 0px;
-        background-color: #fff;
-        z-index: 100;
+<style lang="less" scoped>
+  .console-body {
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    background-color: #fff;
+    z-index: 100;
+    overflow-x: hidden;
+    overflow-y: auto;
+    .console-main {
+      position: relative;
+      padding: 70px 20px 20px 200px;
+      width: auto;
+      height: auto;
     }
+  }
 </style>
 <template>
     <div class="console-body console-sidebar-full">
         <console-topbar></console-topbar>
         <console-sidebar></console-sidebar>
-        <router-view></router-view>
+        <router-view class="console-main"></router-view>
     </div>
 </template>
 <script>
