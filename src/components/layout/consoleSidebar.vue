@@ -74,7 +74,7 @@
           <i class="el-icon-message"></i>
           基础服务
         </template>
-        <el-menu-item index="/thrmenu"><i class="el-icon-document"></i>三级菜单</el-menu-item>
+        <el-menu-item index="/thrmenu/article"><i class="el-icon-document"></i>三级菜单</el-menu-item>
       </el-submenu>
       <el-submenu index="user">
         <template slot="title">
@@ -97,7 +97,8 @@
     },
     computed: {
 			defaultActive: function() {
-				return this.$route.path;
+        const that = this;
+				return that.$route.meta && that.$route.meta.activePath || this.$route.path;
 			}
 		}
   }

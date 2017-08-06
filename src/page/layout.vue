@@ -14,6 +14,9 @@
       padding: 50px 0px 0px 180px;
       width: auto;
       height: auto;
+      &.console-main-full {
+        margin-left: 130px;
+      }
       .console-bcrumd {
         padding: 0px 20px;
         height: 50px;
@@ -26,7 +29,8 @@
     <div class="console-body">
         <console-topbar></console-topbar>
         <console-sidebar></console-sidebar>
-        <div class="console-main">
+        <console-navbar v-show="hasNavbar"></console-navbar>
+        <div class="console-main" :class="{'console-main-full': hasNavbar}">
           <console-bcrumd class="console-bcrumd"></console-bcrumd>
           <router-view></router-view>
         </div>
@@ -36,17 +40,23 @@
     import ConsoleTopbar from '../components/layout/consoleTopbar';
     import ConsoleSidebar from '../components/layout/consoleSidebar';
     import ConsoleBcrumd from '../components/layout/consoleBcrumd';
+    import ConsoleNavbar from '../components/layout/consoleNavbar';
     export default {
-        data () {
-            return {
-            }
-        },
-        components: {
-            ConsoleTopbar,
-            ConsoleSidebar,
-            ConsoleBcrumd
-        },
-        methods: {
+      components: {
+        ConsoleTopbar,
+        ConsoleSidebar,
+        ConsoleBcrumd,
+        ConsoleNavbar
+      },
+      data () {
+        return { }
+      },
+      computed: {
+        hasNavbar () {
+          const $route = this.$route;
+          return $route.meta && $route.meta.navbar && $route.meta.navbar.length > 0;
         }
+      },
+      methods: { }
     }
 </script>

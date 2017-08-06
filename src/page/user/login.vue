@@ -77,10 +77,10 @@
         </div>
         <el-form :model="formLogin" :rules="rulesLogin" ref="formLogin">
           <el-form-item prop="username">
-            <el-input type="text" v-model="formLogin.username" auto-complete="off"></el-input>
+            <el-input type="text" v-model="formLogin.username" auto-complete="off" @keyup.enter.native="submitForm('formLogin')"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input type="password" v-model="formLogin.password" auto-complete="off"></el-input>
+            <el-input type="password" v-model="formLogin.password" auto-complete="off" @keyup.enter.native="submitForm('formLogin')" ></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('formLogin')">登录</el-button>
