@@ -80,4 +80,6 @@ yarn test
 ### 访问
 在浏览器地址栏输入[http://localhost:8080/](http://localhost:8080/)
 
-# vuex简单应用
+## vuex简单应用
+
+## vue自定义组件

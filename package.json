@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "element-ui": "^1.4.1",
+    "loading-vue": "^0.0.2",
     "store": "^2.0.12",
     "three": "^0.86.0",
     "vue": "^2.3.3",
